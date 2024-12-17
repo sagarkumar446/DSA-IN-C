@@ -70,6 +70,39 @@ void changeValueIn(struct  Array* arr,int value, int index)
     
 
 }
+int numberOfElement(struct Array* arr)
+{
+    return arr->lastIndex;
+}
+int isEmpty(struct Array* arr)
+{
+    return arr->lastIndex==-1;
+}
+int isFull(struct Array* arr)
+{
+    return arr->lastIndex==arr->capacity-1;
+}
+int deleteElement(struct Array* arr,int index)
+{
+    if(index>arr->lastIndex+1||index<0)
+    {
+        printf("invalid index");
+    }
+    else{
+        for(int i=index;i<=arr->lastIndex;i++)
+        {
+            arr->ptr[i]=arr->ptr[i+1];
+        }
+        arr->lastIndex--;
+        
+    }
+    
+}
+void release(struct Array* arr)
+{
+    free(arr->ptr);
+    free(arr);
+}
 int main()
 {
     struct Array* arryay= createArray(5);
@@ -80,10 +113,12 @@ int main()
     insertIn(arryay,57,2);
     insertIn(arryay,89,0);
     changeValueIn(arryay,65,1);
+    deleteElement(arryay,4);
     for(int i=0;i<=arryay->lastIndex;i++)
     {
         printf("%d  ",arryay->ptr[i]);
     }
+    printf("\n%d",isEmpty(arryay));
     /* code */
     return 0;
 
